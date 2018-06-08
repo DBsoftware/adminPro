@@ -1,3 +1,10 @@
-<p>
-  graficas1 works!
-</p>
+<div class="row">
+    <div class="col-6" *ngFor="let item of auxCharts">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">{{item.ley}}</h3>
+                <app-grafico-dona [doughnutChartLabels]="item.labels" [doughnutChartData]="item.data" [doughnutChartType]="item.type"></app-grafico-dona>
+            </div>
+        </div>
+    </div>
+</div>
