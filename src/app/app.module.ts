@@ -9,7 +9,7 @@ import { RegisterComponent } from './login/register.component';
 
 // temporal
 import { FormsModule } from '@angular/forms';
-
+import { ServiceModule } from './services/service.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     PagesModule,
     FormsModule,
+    ServiceModule,
     AppRoutingModule
   ],
   providers: [],
