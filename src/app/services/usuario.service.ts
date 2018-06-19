@@ -6,6 +6,8 @@ import { map } from 'rxjs/operators';
 import * as _swal from 'sweetalert';
 import { SweetAlert } from 'sweetalert/typings/core';
 import { Router } from '@angular/router';
+import { UploadService } from './upload.service';
+import { ImagenPipe } from '../pipes/imagen.pipe';
 const swal: SweetAlert = _swal as any;
 
 
@@ -15,7 +17,11 @@ const swal: SweetAlert = _swal as any;
 export class UsuarioService {
   token: string;
   usuario: Usuario;
-  constructor( public http: HttpClient, public rter: Router) { }
+  constructor( public http: HttpClient,
+              public rter: Router,
+              public archSrv :UploadService) {
+    this.usuario = JSON.parse(localStorage.getItem('usuario'));
+  }
 
   isLogIn() {
     return localStorage.getItem('token') != null ? localStorage.getItem('token').length >  20 : false ;
@@ -49,6 +55,11 @@ export class UsuarioService {
     this.usuario = rsp.aux;
     return true;
   }
+  almacenarLocalmenteUpdate(rsp: any ) {
+    localStorage.setItem('usuario', JSON.stringify(rsp.aux));
+    this.usuario = rsp.aux;
+    return rsp;
+  }
 
   logOut() {
     localStorage.removeItem('id');
@@ -57,5 +68,24 @@ export class UsuarioService {
     this.token = '';
     this.usuario = null;
     this.rter.navigate(['/login']);
+  }
+
+  actualizarUsuario(usuario: Usuario) {
+    return this.http.put(`${URL_SERVICIOS}/usuarios/${localStorage.getItem('id')}?token=${localStorage.getItem('token')}`, usuario)
+    .pipe(map((r: any) =>  {
+      swal('Usuario Actualizado', usuario.nombre, 'success');
+      return this.almacenarLocalmenteUpdate(r);
+    })
+  );
+  }
+
+  cambiarImagen(file: File, id: string) {
+    this.archSrv.upload(file, 'usuarios', id)
+                .then((resp: any) => {
+                  this.usuario.img = resp.aux.img;
+                  swal('La imagen fue guardada', this.usuario.nombre, 'success')
+                  this.almacenarLocalmenteUpdate(resp);
+                })
+                .catch(resp => console.log(resp));
   }
 }

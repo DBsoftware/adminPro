@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-lg-7">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Perfil del usuario</h4>
+                <h6 class="card-subtitle">{{userAux.nombre}}</h6>
+                <form ngNativeValidate #f="ngForm" (ngSubmit)="guardar(f.value)" class="form p-t-20">
+                    <div class="form-group">
+                        <label for="exampleInputuname">User Name</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-user"></i></div>
+                            <input [ngModel]="userAux.nombre" name="nombre" type="text" class="form-control" required placeholder="Username">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                        <i class="fa fa-save"></i>
+                        Guardar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card">
+            <div class="card-body" align="center">
+                <h4 class="card-title">Fotografía del usuario</h4>
+                <h6 class="card-subtitle">{{userAux.nombre}}</h6>
+                <img *ngIf="!imgTemp" [src]="userAux.img | imagen" class="w150 img-rounded m-5" alt="">
+                <img *ngIf="imgTemp" [src]="imgTemp" class="w150 img-rounded m-5" alt="">
+                <input (change)="selectImg($event.target.files[0])" class="mb-3" type="file" name="img" id="">
+                <button (click)="cambiarImg()" [disabled]="!imgUpload" class="mt-2" type="submit" class="btn btn-block btn-success waves-effect waves-light m-r-10">
+                    <i class="fa fa-save"></i>
+                    Actualizar foto
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

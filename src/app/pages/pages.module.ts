@@ -16,6 +16,8 @@ import { IncrementadorComponent } from '../components/incrementador/incrementado
 import { GraficoDonaComponent } from '../components/grafico-dona/grafico-dona.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { PipesModule } from '../pipes/pipes.module';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
     declarations: [
@@ -27,18 +29,22 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     IncrementadorComponent,
     AccountSettingsComponent,
     PromesasComponent,
-    RxjsComponent
+    RxjsComponent,
+    ProfileComponent
     ],
     exports: [
         DashboardComponent,
         ProgressComponent,
         Graficas1Component
     ],
-    imports: [SharedModule,
-            PagesRoutingModule,
-            FormsModule,
-            BrowserModule,
-            ChartsModule]
+    imports: [
+        SharedModule,
+        PagesRoutingModule,
+        FormsModule,
+        BrowserModule,
+        PipesModule,
+        ChartsModule
+        ]
 })
 
 export class PagesModule {}

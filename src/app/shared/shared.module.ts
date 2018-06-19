@@ -5,10 +5,14 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 @NgModule({
-    imports: [RouterModule, BrowserModule],
+    imports: [
+        RouterModule,
+        BrowserModule,
+        PipesModule],
     declarations: [
         NopagefoundComponent,
         HeaderComponent,
