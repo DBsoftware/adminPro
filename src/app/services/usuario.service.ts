@@ -56,7 +56,9 @@ export class UsuarioService {
     return true;
   }
   almacenarLocalmenteUpdate(rsp: any ) {
-    localStorage.setItem('usuario', JSON.stringify(rsp.aux));
+    if(rsp._id === this.usuario._id) {
+      localStorage.setItem('usuario', JSON.stringify(rsp.aux));
+    }
     this.usuario = rsp.aux;
     return rsp;
   }
@@ -70,8 +72,8 @@ export class UsuarioService {
     this.rter.navigate(['/login']);
   }
 
-  actualizarUsuario(usuario: Usuario) {
-    return this.http.put(`${URL_SERVICIOS}/usuarios/${localStorage.getItem('id')}?token=${localStorage.getItem('token')}`, usuario)
+  actualizarUsuario(usuario: Usuario, obj? ) {
+    return this.http.put(`${URL_SERVICIOS}/usuarios/${usuario._id}?token=${localStorage.getItem('token')}`, (obj) ? obj : usuario)
     .pipe(map((r: any) =>  {
       swal('Usuario Actualizado', usuario.nombre, 'success');
       return this.almacenarLocalmenteUpdate(r);
@@ -87,5 +89,21 @@ export class UsuarioService {
                   this.almacenarLocalmenteUpdate(resp);
                 })
                 .catch(resp => console.log(resp));
+  }
+  loadUsers(desde: number = 0 ) {
+    return this.http.get(`${URL_SERVICIOS}/usuarios?desde=${desde}&limite=5`);
+  }
+
+  searchUser(t: string) {
+    return this.http.get(`${URL_SERVICIOS}/busqueda/coleccion/usuarios/${t}`)
+                    .pipe(map((r: any) => r.aux));
+  }
+
+  deleteUser(id: any) {
+    return this.http.delete(`${URL_SERVICIOS}/usuarios/${id}?token=${localStorage.getItem('token')}`)
+                    .pipe(map((r: any) => {
+                      swal('Operación exitosa', 'El usuario ha sido eliminado del sistema', 'success');
+                      return true;
+                    }));
   }
 }

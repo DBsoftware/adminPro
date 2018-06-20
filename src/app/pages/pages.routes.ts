@@ -11,6 +11,7 @@ import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { LoginGuard } from '../services/service.index';
 import { ProfileComponent } from './profile/profile.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 const Proutes: Routes = [
     {
@@ -25,6 +26,8 @@ const Proutes: Routes = [
         { path: 'account-settings', component: AccountSettingsComponent, data: {titulo: 'Account Settings'}},
         { path: 'perfil', component: ProfileComponent, data: {titulo: 'Perfil de usuario'}},
         { path: 'graficas1', component: Graficas1Component, data: {titulo: 'Graficas'}},
+        // Matenimiento
+        { path: 'usuarios', component: UsuariosComponent, data: {titulo: 'Mantenimiento de usuarios'}},
         { path: '', redirectTo: '/dashboard', pathMatch: 'full'}
 
         ],

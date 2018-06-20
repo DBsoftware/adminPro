@@ -1,0 +1,24 @@
+<div class="fondo-modal w-100 h-100 animated fadeIn" [ngClass]="mdSrv.oculto">
+    <div class="modal d-block animated slideInUp" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modelTitleId">Modal title</h4>
+                    <button type="button" class="close" (click)="cerrarModal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" align="center">
+                    <img *ngIf="!imgTemp" [src]="'xxx' | imagen" class="w150 img-rounded m-5" alt="">
+                    <img *ngIf="imgTemp" [src]="imgTemp" class="w150 img-rounded m-5" alt="">
+                    <input (change)="selectImg($event.target.files[0])" class="mb-3" type="file" name="img" id="">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="cerrarModal()">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="cambiarImg()" [disabled]="!imgTemp">Subir Imagen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->

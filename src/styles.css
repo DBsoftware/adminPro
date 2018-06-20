@@ -9,3 +9,19 @@
 .w150 {
     width: 150px;
 }
+
+.w70 {
+    width: 70px;
+}
+
+.img50 {
+    width: 50px;
+}
+
+.fondo-modal {
+    background-color: rgba(52, 57, 80, 0.6);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 99999;
+}

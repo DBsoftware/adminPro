@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class SidebarService {
   menu: any = [
       {
-    titulo: 'principal',
+    titulo: 'Principal',
     icono: 'mdi mdi-gauge',
     submenu: [
       {titulo: 'Dashboard' , url: '/dashboard'},
@@ -15,7 +15,17 @@ export class SidebarService {
       {titulo: 'Promesas' , url: '/promesas'},
       {titulo: 'Rxjs' , url: '/Rxjs'}
     ]
-  }];
+  },
+      {
+    titulo: 'Mantenimientos',
+    icono: 'mdi mdi-folder-lock-open',
+    submenu: [
+      {titulo: 'Usuarios' , url: '/usuarios'},
+      {titulo: 'Hospitales' , url: '/hospitales'},
+      {titulo: 'Medicos' , url: '/medicos'}
+    ]
+  }
+];
 
 
   constructor() { }
