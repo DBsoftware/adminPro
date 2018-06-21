@@ -22,41 +22,36 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h3 class="card-title">Usuarios Registrados <span class="badge badge-info">{{totalRegistros}}</span></h3>
+                <div class="text-right">
+                    <button type="button" (click)="crearHospital()" class="btn btn-primary btn-rounded waves-effect waves-light">
+                                    <i class="fa fa-plus"></i> Crear Hospital
+                        </button>
+                </div>
+                <h3 class="card-title">Hospitales Registrados <span class="badge badge-info">{{totalRegistros}}</span></h3>
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Imagen</th>
-                            <th>Correo</th>
-                            <th>Nombre</th>
-                            <th>Role</th>
-                            <th>Auth</th>
+                            <th>Foto</th>
+                            <th>Hospital</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let user of users">
+                        <tr *ngFor="let hospital of hospitales">
                             <td class="w70">
-                                <img [src]="user.img | imagen" class="img-thumbnail rounded-circle img50 pointer" alt="" (click)="mostrarModal(user._id)">
-                            </td>
-                            <td>{{user.email}}</td>
-                            <td>{{ user.nombre }}</td>
-                            <td>
-                                <select [(ngModel)]="user.role" class="form-control" name="role" id="">
-                                    <option value="ADMIN_ROLE">ADMIN_ROLE</option>
-                                    <option value="USER_ROLE">USER_ROLE</option>
-                                </select>
+                                <img [src]="hospital.img | imagen:'hospitales'" class="img-thumbnail img-fluid rounded-circle img50 pointer" alt="" (click)="mostrarModal(hospital._id)">
                             </td>
                             <td>
-                                <label for="" *ngIf="user.google" class="label label-danger text-white">Google</label>
-                                <label for="" *ngIf="!user.google" class="label label-primary text-white">Normal</label>
+                                <div class="form-group">
+                                    <input type="text" [(ngModel)]="hospital.nombre" value="{{hospital.nombre}}" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                                </div>
                             </td>
                             <td>
-                                <button (click)="guardar(user)" type="button" class="btn btn-warning mr-3">
-                                    <i class="fa fa-save"></i>
+                                <button (click)="guardar(hospital)" type="button" class="btn btn-warning mr-3">
+                                <i class="fa fa-save"></i>
                                 </button>
-                                <button (click)="borrar(user)" type="button" class="btn btn-danger">
-                                    <i class="fa fa-trash-o"></i>
+                                <button (click)="borrar(hospital)" type="button" class="btn btn-danger">
+                                <i class="fa fa-trash-o"></i>
                                 </button>
                             </td>
                         </tr>

@@ -5,7 +5,10 @@ import { SettingsService,
         SidebarService,
         UsuarioService,
         LoginGuard,
-        UploadService} from './service.index';
+        UploadService,
+        HospitalService,
+        MedicoService
+      } from './service.index';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalUploadService } from '../components/modal-upload.service';
 
@@ -21,7 +24,9 @@ import { ModalUploadService } from '../components/modal-upload.service';
     SidebarService,
     UsuarioService,
     LoginGuard,
-    ModalUploadService
+    ModalUploadService,
+    HospitalService,
+    MedicoService
   ],
   declarations: []
 })

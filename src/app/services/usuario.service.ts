@@ -7,7 +7,6 @@ import * as _swal from 'sweetalert';
 import { SweetAlert } from 'sweetalert/typings/core';
 import { Router } from '@angular/router';
 import { UploadService } from './upload.service';
-import { ImagenPipe } from '../pipes/imagen.pipe';
 const swal: SweetAlert = _swal as any;
 
 
@@ -18,8 +17,8 @@ export class UsuarioService {
   token: string;
   usuario: Usuario;
   constructor( public http: HttpClient,
-              public rter: Router,
-              public archSrv :UploadService) {
+              public router: Router,
+              public archSrv: UploadService) {
     this.usuario = JSON.parse(localStorage.getItem('usuario'));
   }
 
@@ -36,10 +35,15 @@ export class UsuarioService {
   }
 
   loginUser(usuario: Usuario, recordar: boolean) {
-    (recordar) ? localStorage.setItem('email', usuario.email) : localStorage.removeItem('email');
-    return this.http.post(`${URL_SERVICIOS}/login`, usuario)
-                          .pipe(map((r: any) =>  this.almacenarLocalmente(r)));
 
+    (recordar) ?
+    localStorage.setItem('email', usuario.email) :
+    localStorage.removeItem('email');
+
+    return this.http.post(`${URL_SERVICIOS}/login`, usuario)
+                          .pipe(
+                            map((r: any) =>  this.almacenarLocalmente(r))
+                          );
                         }
 
   loginUserGoogle(token: string) {
@@ -56,7 +60,7 @@ export class UsuarioService {
     return true;
   }
   almacenarLocalmenteUpdate(rsp: any ) {
-    if(rsp._id === this.usuario._id) {
+    if (rsp._id === this.usuario._id) {
       localStorage.setItem('usuario', JSON.stringify(rsp.aux));
     }
     this.usuario = rsp.aux;
@@ -69,7 +73,7 @@ export class UsuarioService {
     localStorage.removeItem('usuario');
     this.token = '';
     this.usuario = null;
-    this.rter.navigate(['/login']);
+    this.router.navigate(['/login']);
   }
 
   actualizarUsuario(usuario: Usuario, obj? ) {
@@ -85,7 +89,7 @@ export class UsuarioService {
     this.archSrv.upload(file, 'usuarios', id)
                 .then((resp: any) => {
                   this.usuario.img = resp.aux.img;
-                  swal('La imagen fue guardada', this.usuario.nombre, 'success')
+                  swal('La imagen fue guardada', this.usuario.nombre, 'success');
                   this.almacenarLocalmenteUpdate(resp);
                 })
                 .catch(resp => console.log(resp));

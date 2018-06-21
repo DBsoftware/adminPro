@@ -15,7 +15,7 @@ export class ImagenPipe implements PipeTransform {
     switch (key) {
       case 'usuario':
         return '/usuarios/';
-      case 'hospital':
+      case 'hospitales':
         return '/hospitales/';
       case 'medico':
         return '/medicos/';

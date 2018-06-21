@@ -12,7 +12,7 @@ import { ModalUploadService } from '../modal-upload.service';
 export class ModalUploadComponent implements OnInit {
   imgUpload: File;
   imgTemp: string;
-  constructor(public uldSrv:UploadService, public mdSrv: ModalUploadService) {
+  constructor(public servicioSubida: UploadService, public servicioModal: ModalUploadService) {
   }
 
   ngOnInit() {
@@ -31,10 +31,11 @@ export class ModalUploadComponent implements OnInit {
     const urlImgTemp = reader.readAsDataURL(this.imgUpload);
     reader.onloadend = () => this.imgTemp = reader.result;
   }
-  cambiarImg(user: Usuario) {
-    this.uldSrv.upload(this.imgUpload, this.mdSrv.tipo , this.mdSrv.id)
+  cambiarImg() {
+    this.servicioSubida.upload(this.imgUpload, this.servicioModal.tipo , this.servicioModal.id)
     .then(r => {
-      this.mdSrv.notification.emit(r);
+      this.servicioModal.notification.emit(r);
+      swal('Operacion exitosa', 'Imagen guardada', 'success' );
       this.cerrarModal();
     })
     .catch(r => console.log(r));
@@ -43,7 +44,7 @@ export class ModalUploadComponent implements OnInit {
     cerrarModal() {
       this.imgTemp = null;
       this.imgUpload = null;
-      this.mdSrv.ocultarModal();
+      this.servicioModal.ocultarModal();
     }
 
 }
