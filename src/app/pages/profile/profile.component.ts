@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
     const obj: any  = {};
     obj.nombre = u.nombre;
     this.userAux.nombre = u.nombre;
-      this.usrSrv.actualizarUsuario(obj)
+      this.usrSrv.actualizarUsuario(this.userAux, obj)
       .subscribe();
     }
 

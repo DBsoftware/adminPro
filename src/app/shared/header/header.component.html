@@ -43,8 +43,9 @@
                 <!-- Search -->
                 <!-- ============================================================== -->
                 <li class="nav-item hidden-xs-down search-box"> <a class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
-                    <form class="app-search">
-                        <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i class="ti-close"></i></a> </form>
+                    <div class="app-search">
+                        <input #in (keyup.enter)="buscar(in.value)" type="text" class="form-control" placeholder="Buscar & enter"> <a class="srh-btn"><i class="ti-close"></i></a>
+                    </div>
                 </li>
                 <!-- ============================================================== -->
                 <!-- ============================================================== -->
@@ -134,7 +135,7 @@
                             <li role="separator" class="divider"></li>
                             <li><a [routerLink]="[ '/account-settings' ]"><i class="ti-settings"></i> Account Setting</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a (click)="usrSrv.logOut()" class="pointer"><i class="fa fa-power-off"></i> Logout</a></li>
+                            <li><a (click)="usuarioSrv.logOut()" class="pointer"><i class="fa fa-power-off"></i> Logout</a></li>
                         </ul>
                     </div>
                 </li>

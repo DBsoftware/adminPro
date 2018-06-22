@@ -16,13 +16,13 @@ export class UsuariosComponent implements OnInit {
   constructor(public usrSrv: UsuarioService, public muSrv: ModalUploadService ) { }
 
   ngOnInit() {
-    this.loadUsers();
-    this.muSrv.notification.subscribe(r => this.loadUsers());
+    this.cargarUsuarios();
+    this.muSrv.notification.subscribe(r => this.cargarUsuarios());
   }
 
-  loadUsers() {
+  cargarUsuarios() {
     this.cargando = true;
-    this.usrSrv.loadUsers(this.desde)
+    this.usrSrv.cargarUsuarios(this.desde)
                 .subscribe((r: any) => {
                   this.totalRegistros = r.total;
                   this.users = r.aux;
@@ -34,15 +34,15 @@ export class UsuariosComponent implements OnInit {
   this.desde = (this.desde + n) >= this.totalRegistros || (this.desde + n) < 0 ?
                 this.desde :
                 (this.desde + n);
-  this.loadUsers();
+  this.cargarUsuarios();
   }
   buscarUser(termino: string) {
     this.cargando = true;
     if (termino.length === 0 ) {
-      this.loadUsers();
+      this.cargarUsuarios();
       return;
     }
-    this.usrSrv.searchUser(termino).subscribe((r: Usuario[]) => {
+    this.usrSrv.buscarUsuario(termino).subscribe((r: Usuario[]) => {
       this.users = r;
       this.cargando = false;
     });
@@ -60,7 +60,7 @@ export class UsuariosComponent implements OnInit {
         dangerMode: true
       }
     ).then((result) => {
-      result ? this.usrSrv.deleteUser(aux._id).subscribe(() => this.loadUsers()) : console.log(result);
+      result ? this.usrSrv.deleteUser(aux._id).subscribe(() => this.cargarUsuarios()) : console.log(result);
     });
   }
 
