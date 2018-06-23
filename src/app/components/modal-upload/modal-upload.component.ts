@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuarioService } from '../../services/service.index';
-import { Usuario } from '../../models/usuario.model';
 import { UploadService } from '../../services/upload.service';
 import { ModalUploadService } from '../modal-upload.service';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-modal-upload',

@@ -5,9 +5,7 @@ import { Router } from '@angular/router';
 import { UploadService } from './upload.service';
 import { URL_SERVICIOS } from '../config/config';
 import { map } from 'rxjs/operators';
-import * as _swal from 'sweetalert';
-import { SweetAlert } from 'sweetalert/typings/core';
-const swal: SweetAlert = _swal as any;
+import swal from 'sweetalert';
 
 @Injectable({
   providedIn: 'root'

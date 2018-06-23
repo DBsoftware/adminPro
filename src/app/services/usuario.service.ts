@@ -3,12 +3,10 @@ import { Usuario } from '../models/usuario.model';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../config/config';
 import { map, catchError } from 'rxjs/operators';
-import * as _swal from 'sweetalert';
-import { SweetAlert } from 'sweetalert/typings/core';
+import swal from 'sweetalert';
 import { Router } from '@angular/router';
 import { UploadService } from './upload.service';
 import { throwError } from 'rxjs';
-const swal: SweetAlert = _swal as any;
 
 
 @Injectable({
@@ -61,6 +59,22 @@ export class UsuarioService {
     this.usuario = null;
     this.menu = [];
     this.router.navigate(['/login']);
+  }
+
+  renovarToken() {
+    return this.http.get(
+      `${URL_SERVICIOS}/login/renuevaToken?token=${this.token}`)
+      .pipe(map((r: any) => {
+        this.token = r.token;
+        localStorage.setItem('token', r.token);
+        return true;
+      }),
+      catchError(err => {
+        this.router.navigate(['/login']);
+        swal('La accion no se pudo llevar a cabo', 'No fue posible renovar el token', 'error');
+        return throwError(err);
+      })
+    );
   }
 //  ==========================================
 //  ==========Almacenamiento==================

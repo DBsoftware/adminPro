@@ -4,9 +4,8 @@ declare function init_plugins();
 import { UsuarioService } from '../services/service.index';
 import { Usuario } from '../models/usuario.model';
 import { Router } from '@angular/router';
-import * as _swal from 'sweetalert';
-import { SweetAlert } from 'sweetalert/typings/core';
-const swal: SweetAlert = _swal as any;
+import swal from 'sweetalert';
+
 
 @Component({
   selector: 'app-register',
@@ -23,7 +22,7 @@ export class RegisterComponent implements OnInit {
     init_plugins();
 
     this.forma = new FormGroup({
-      nombre: new FormControl(null,Validators.required),
+      nombre: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, Validators.required),
       password2: new FormControl(null, Validators.required),
@@ -37,19 +36,19 @@ export class RegisterComponent implements OnInit {
     email: 'Fake@gmail.com',
     password: '123456',
     password2: '123456',
-    condiciones: true 
+    condiciones: true
   });
   }
 
   sonIguales(field1: string, field2: string ) {
-    return (group: FormGroup) =>  (group.controls[field1].value === group.controls[field2].value) 
-                                  ? null : {sonIguales:true};
+    return (group: FormGroup) =>  (group.controls[field1].value === group.controls[field2].value)
+                                  ? null : {sonIguales: true};
   }
 
-  registrarUsuario(){
+  registrarUsuario() {
     (this.forma.invalid) ? console.log('forma invalida') :
     (!this.forma.value.condiciones ?
-      swal('Importante', 'Debe aceptar las condiciones','warning'): this.crearUser() );
+      swal('Importante', 'Debe aceptar las condiciones', 'warning') : this.crearUser() );
   }
 
   crearUser() {

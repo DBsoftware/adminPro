@@ -3,11 +3,9 @@ import { Hospital } from '../models/hospital.model';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../config/config';
 import { map } from 'rxjs/operators';
-import * as _swal from 'sweetalert';
-import { SweetAlert } from 'sweetalert/typings/core';
+import swal from 'sweetalert';
 import { Router } from '@angular/router';
 import { UploadService } from './upload.service';
-const swal: SweetAlert = _swal as any;
 
 @Injectable({
   providedIn: 'root'
