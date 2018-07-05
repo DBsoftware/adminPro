@@ -1,0 +1,77 @@
+<div class="container animated fadeIn">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <input #input (keyup)="buscar(input.value)" type="text" class="form-control" placeholder="Buscar usuario" name="" id="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="cargando" class="row animated fadeIn">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center" role="alert">
+            <strong>Cargando</strong>
+            <i class="fa fa-refresh fa-2x fa-spin mx-3"></i>
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+<div class="row animated fadeIn" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-right">
+                    <button type="button" (click)="crearproducto()" class="btn btn-primary btn-rounded waves-effect waves-light">
+                                    <i class="fa fa-plus"></i> Crear producto
+                        </button>
+                </div>
+                <h3 class="card-title">productos Registrados <span class="badge badge-info">{{totalRegistros}}</span></h3>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Foto</th>
+                            <th>Producto</th>
+                            <th>Descripcion</th>
+                            <th>Precio</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let producto of productos">
+                            <td class="w70">
+                                <img [src]="producto.img | imagen:'productos'" class="img-thumbnail img-fluid rounded-circle img50 pointer" alt="" (click)="mostrarModal(producto._id)">
+                            </td>
+                            <td class="w150">
+                                <div class="form-group">
+                                    <input type="text" [(ngModel)]="producto.nombre" value="{{producto.nombre}}" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" [(ngModel)]="producto.desc" value="{{producto.desc}}" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                                </div>
+                            </td>
+                            <td class="w150">
+                                <div class="form-group">
+                                    <input type="text" [(ngModel)]="producto.precio" value="{{producto.precio}}" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                                </div>
+                            </td>
+                            <td>
+                                <button (click)="guardar(producto)" type="button" class="btn btn-warning d-inline mr-2">
+                                <i class="fa fa-save"></i>
+                                </button>
+                                <button (click)="borrar(producto)" type="button" class="btn btn-danger d-inline">
+                                <i class="fa fa-trash-o"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" (click)="cambiarDesde(-5)" class="btn btn-secondary">Anteriores</button>
+                <button type="button" (click)="cambiarDesde(5)" class="btn btn-secondary">Siguientes</button>
+            </div>
+        </div>
+    </div>
+</div>

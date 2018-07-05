@@ -3,7 +3,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <input #input (keyup)="buscarUser(input.value)" type="text" class="form-control" placeholder="Buscar usuario" name="" id="">
+                    <input #input (keyup)="buscar(input.value)" type="text" class="form-control" placeholder="Buscar blog" name="" id="">
                 </div>
             </div>
         </div>
@@ -23,34 +23,36 @@
         <div class="card">
             <div class="card-body">
                 <div class="text-right">
-                    <button type="button" (click)="crearHospital()" class="btn btn-primary btn-rounded waves-effect waves-light">
-                                    <i class="fa fa-plus"></i> Crear Hospital
-                        </button>
+                    <button type="button" [routerLink]="['/blog','nuevo']" class="btn btn-primary btn-rounded waves-effect waves-light">
+                                <i class="fa fa-plus"></i> Crear Blog
+                    </button>
                 </div>
-                <h3 class="card-title">Hospitales Registrados <span class="badge badge-info">{{totalRegistros}}</span></h3>
+                <h3 class="card-title">Blogs Registrados <span class="badge badge-info">{{totalRegistros}}</span></h3>
                 <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>Foto</th>
-                            <th>Hospital</th>
+                            <th>Titulo</th>
+                            <th>autor</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let hospital of hospitales">
+                        <tr *ngFor="let b of blogs">
                             <td class="w70">
-                                <img [src]="hospital.img | imagen:'hospitales'" class="img-thumbnail img-fluid rounded-circle img50 pointer" alt="" (click)="mostrarModal(hospital._id)">
+                                <img [src]="b.img | imagen:'blogs'" class="img-thumbnail img-fluid rounded-left img50" alt="">
                             </td>
                             <td>
-                                <div class="form-group">
-                                    <input type="text" [(ngModel)]="hospital.nombre" value="{{hospital.nombre}}" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
-                                </div>
+                                {{b.titulo}}
                             </td>
                             <td>
-                                <button (click)="guardar(hospital)" type="button" class="btn btn-warning mr-3">
-                                <i class="fa fa-save"></i>
+                                {{b.autor.nombre}}
+                            </td>
+                            <td>
+                                <button [routerLink]="['/blog',b._id]" type="button" class="btn btn-warning mr-3">
+                                <i class="fa fa-edit"></i>
                                 </button>
-                                <button (click)="borrar(hospital)" type="button" class="btn btn-danger">
+                                <button (click)="borrar(b)" type="button" class="btn btn-danger">
                                 <i class="fa fa-trash-o"></i>
                                 </button>
                             </td>

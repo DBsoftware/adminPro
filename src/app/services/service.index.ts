@@ -6,8 +6,8 @@ export { SharedService } from './shared.service';
 export { SidebarService } from './sidebar.service';
 export { UsuarioService } from './usuario.service';
 export { UploadService } from './upload.service';
-export { HospitalService } from './hospital.service';
-export { MedicoService } from './medico.service';
+export { ProductoService } from './producto.service';
+export { BlogService } from './blog.service';
 // =================================================
 // ===========GUARDS================================
 // =================================================

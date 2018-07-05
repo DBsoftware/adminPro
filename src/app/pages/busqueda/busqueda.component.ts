@@ -4,8 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { map } from 'rxjs/operators';
 import { Usuario } from '../../models/usuario.model';
-import { Hospital } from '../../models/hospital.model';
-import { Medico } from '../../models/medico.model';
+import { Producto } from '../../models/producto.model';
+import { Blog } from '../../models/blog.model';
 
 @Component({
   selector: 'app-busqueda',
@@ -13,9 +13,9 @@ import { Medico } from '../../models/medico.model';
   styles: []
 })
 export class BusquedaComponent implements OnInit {
-  usuarios: Usuario[];
-  hospitales: Hospital[];
-  medicos: Medico[];
+  usuarios: Usuario[] = [];
+  productos: Producto[] = [];
+  blogs: Blog[] = [];
   constructor(public activatedRoute: ActivatedRoute,
               public http: HttpClient) {
     this.activatedRoute.params.subscribe(p => {
@@ -26,11 +26,12 @@ export class BusquedaComponent implements OnInit {
   ngOnInit() {
   }
   buscar(termino: string) {
+    termino = termino === '' ? '%20' : termino;
     this.http.get(`${URL_SERVICIOS}/busqueda/todo/${termino}`)
     .pipe(map((r: any) => r.aux))
     .subscribe(r => {
-      [this.hospitales, this.medicos, this.usuarios] = r;
-      console.log(this.hospitales);
+      [this.productos, this.blogs, this.usuarios] = r;
+      console.log(this.productos);
     });
   }
 }

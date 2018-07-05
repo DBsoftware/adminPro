@@ -13,7 +13,7 @@
                     <tbody>
                         <tr *ngFor="let user of usuarios" [routerLink]="['/usuarios']" class="pointer">
                             <td>
-                                <img [src]="user.img | imagen" class="img-thumbnail rounded-circle img50 pointer" alt="" (click)="mostrarModal(user._id)">
+                                <img [src]="user.img | imagen" class="img-thumbnail rounded-circle img50 pointer" alt="">
                             </td>
                             <td>{{user.nombre}}</td>
                         </tr>
@@ -28,8 +28,8 @@
     <div class="col-4">
         <div class="card">
             <div class="card-body">
-                <h3 class="card-title">Medicos</h3>
-                <table class="table table-hover" *ngIf="medicos.length > 0">
+                <h3 class="card-title">Blogs</h3>
+                <table class="table table-hover" *ngIf="blogs.length > 0">
                     <thead>
                         <tr>
                             <th>Foto</th>
@@ -37,18 +37,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let med of medicos">
+                        <tr *ngFor="let blog of blogs">
                             <td>
-                                <img [src]="med.img | imagen:'medico'" class="img-thumbnail rounded-circle img50 pointer" alt="" (click)="mostrarModal(user._id)">
+                                <img [src]="blog.img | imagen:'blogs'" class="img-thumbnail rounded-circle img50 pointer" alt="">
                             </td>
-                            <td>{{med.nombre}}</td>
+                            <td>{{blog.titulo}}</td>
                             <td>
-                                <button class="btn btn-primary" [routerLink]="['/medico',med._id]" type="button"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-primary" [routerLink]="['/blog',blog._id]" type="button"><i class="fa fa-edit"></i></button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <div class="alert alert-secondary" *ngIf="medicos.length === 0" role="alert">
+                <div class="alert alert-secondary" *ngIf="blogs.length === 0" role="alert">
                     <strong>No existen registros</strong>
                 </div>
             </div>
@@ -57,8 +57,8 @@
     <div class="col-4">
         <div class="card">
             <div class="card-body">
-                <h3 class="card-title">Hospitales</h3>
-                <table class="table table-hover" *ngIf="hospitales.length > 0">
+                <h3 class="card-title">Productos</h3>
+                <table class="table table-hover" *ngIf="productos.length > 0">
                     <thead>
                         <tr>
                             <th>Foto</th>
@@ -66,15 +66,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let hop of hospitales" [routerLink]="['/hospitales']" class="pointer">
+                        <tr *ngFor="let producto of productos" [routerLink]="['/productos']" class="pointer">
                             <td>
-                                <img [src]="hop.img | imagen:'hospitales'" class="img-thumbnail rounded-circle img50 pointer" alt="" (click)="mostrarModal(user._id)">
+                                <img [src]="producto.img | imagen:'productos'" class="img-thumbnail rounded-circle img50 pointer" alt="">
                             </td>
-                            <td>{{hop.nombre}}</td>
+                            <td>{{producto.nombre}}</td>
                         </tr>
                     </tbody>
                 </table>
-                <div class="alert alert-secondary" *ngIf="hospitales.length === 0" role="alert">
+                <div class="alert alert-secondary" *ngIf="productos.length === 0" role="alert">
                     <strong>No existen registros</strong>
                 </div>
             </div>

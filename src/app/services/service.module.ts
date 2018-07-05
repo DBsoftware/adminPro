@@ -6,8 +6,8 @@ import { SettingsService,
         UsuarioService,
         LoginGuard,
         UploadService,
-        HospitalService,
-        MedicoService,
+        ProductoService,
+        BlogService,
         VerificaTokenGuard,
         AdminGuard
       } from './service.index';
@@ -26,8 +26,8 @@ import { ModalUploadService } from '../components/modal-upload.service';
     SidebarService,
     UsuarioService,
     ModalUploadService,
-    HospitalService,
-    MedicoService,
+    ProductoService,
+    BlogService,
     LoginGuard,
     AdminGuard,
     VerificaTokenGuard

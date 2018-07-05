@@ -18,9 +18,9 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
-import { HospitalesComponent } from './hospitales/hospitales.component';
-import { MedicosComponent } from './medicos/medicos.component';
-import { MedicoComponent } from './medicos/medico.component';
+import { ProductosComponent } from './productos/productos.component';
+import { BlogsComponent } from './blogs/blogs.component';
+import { BlogComponent } from './blogs/blog.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 
 
@@ -36,9 +36,9 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
     RxjsComponent,
     ProfileComponent,
     UsuariosComponent,
-    HospitalesComponent,
-    MedicosComponent,
-    MedicoComponent,
+    ProductosComponent,
+    BlogsComponent,
+    BlogComponent,
     BusquedaComponent
     ],
     exports: [

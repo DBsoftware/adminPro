@@ -1,34 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { Medico } from '../../models/medico.model';
-import { MedicoService } from '../../services/service.index';
+import { Blog } from '../../models/blog.model';
+import { BlogService } from '../../services/service.index';
 import { ModalUploadService } from '../../components/modal-upload.service';
 declare var swal: any;
 
 @Component({
-  selector: 'app-medicos',
-  templateUrl: './medicos.component.html'
+  selector: 'app-blogs',
+  templateUrl: './blogs.component.html'
 })
 
-export class MedicosComponent implements OnInit {
-  medicos: Medico[] = [];
+export class BlogsComponent implements OnInit {
+  blogs: Blog[] = [];
   desde: number = 0;
   totalRegistros: number = 0;
   cargando = true;
-  constructor(public medicoService: MedicoService,
+  constructor(public blogService: BlogService,
               // public modalUploadSrv: ModalUploadService
             ) { }
 
   ngOnInit() {
-    this.cargarmedicos();
+    this.cargar();
     // this.modalUploadSrv.notification.subscribe(r => this.cargarmedicos());
   }
 
-  cargarmedicos() {
+  cargar() {
     this.cargando = true;
-    this.medicoService.cargarMedicos(this.desde)
+    this.blogService.cargar(this.desde)
                 .subscribe((r: any) => {
                   this.totalRegistros = r.total;
-                  this.medicos = r.aux;
+                  this.blogs = r.aux;
                   this.cargando = false;
                 });
   }
@@ -37,46 +37,46 @@ export class MedicosComponent implements OnInit {
   this.desde = (this.desde + n) >= this.totalRegistros || (this.desde + n) < 0 ?
                 this.desde :
                 (this.desde + n);
-  this.cargarmedicos();
+  this.cargar();
   }
-  buscarMedico(termino: string) {
+  buscar(termino: string) {
     this.cargando = true;
     if (termino.length === 0 ) {
-      this.cargarmedicos();
+      this.cargar();
       return;
     }
-    this.medicoService.buscarMedico(termino).subscribe((r: Medico[]) => {
-      this.medicos = r;
+    this.blogService.buscar(termino).subscribe((r: Blog[]) => {
+      this.blogs = r;
       this.cargando = false;
     });
   }
 
-  editar(h: Medico) {
-    const o: Medico = {nombre: h.nombre};
-    this.medicoService.actualizarMedico(h, o).subscribe();
+  editar(h: Blog) {
+    const o: Blog = {titulo: h.titulo};
+    this.blogService.actualizar(h, o).subscribe();
   }
 
   // mostrarModal(id: string) {
   //     this.modalUploadSrv.mostrarModal('medicos', id);
   // }
 
-  borrar(aux: Medico) {
+  borrar(aux: Blog) {
     aux._id === localStorage.getItem('id') ?
     swal('No se puede borrar Medico', 'No se puede borrar a ud mismo', 'error') :
     swal(
       {
         title: 'Está seguro?',
-        text: `Está a punto de eliminar a ${aux.nombre} del sistema`,
+        text: `Está a punto de eliminar a ${aux.titulo} del sistema`,
         icon: 'warning',
         buttons: true,
         dangerMode: true
       }
     ).then((result) => {
-      result ? this.medicoService.borrarMedico(aux._id).subscribe(() => this.cargarmedicos()) : console.log(result);
+      result ? this.blogService.borrar(aux._id).subscribe(() => this.cargar()) : console.log(result);
     });
   }
 
-  crearMedico() {
+  crear() {
     swal(
     {
       content: 'input',
@@ -87,8 +87,8 @@ export class MedicosComponent implements OnInit {
     })
     .then((value: string) => {
       (value !== null && value.trim().length > 0) ?
-      this.medicoService.crearMedico({nombre: value}).subscribe(() => {
-        this.cargarmedicos();
+      this.blogService.crear({titulo: value}).subscribe(() => {
+        this.cargar();
       }) : console.log('cancelado');
     });
 

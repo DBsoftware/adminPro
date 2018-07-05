@@ -11,9 +11,9 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import { AdminGuard } from '../services/service.index';
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
-import { HospitalesComponent } from './hospitales/hospitales.component';
-import { MedicoComponent } from './medicos/medico.component';
-import { MedicosComponent } from './medicos/medicos.component';
+import { ProductosComponent } from './productos/productos.component';
+import { BlogComponent } from './blogs/blog.component';
+import { BlogsComponent } from './blogs/blogs.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 
 const Proutes: Routes = [
@@ -31,9 +31,9 @@ const Proutes: Routes = [
             canActivate: [AdminGuard],
             component: UsuariosComponent,
             data: {titulo: 'Mantenimiento de usuarios'}},
-        { path: 'medicos', component: MedicosComponent, data: {titulo: 'Mantenimiento de medicos'}},
-        { path: 'medico/:id', component: MedicoComponent, data: {titulo: 'Actualizar de medico'}},
-        { path: 'hospitales', component: HospitalesComponent, data: {titulo: 'Mantenimiento de hospitales'}},
+        { path: 'blogs', component: BlogsComponent, data: {titulo: 'Mantenimiento de blogs'}},
+        { path: 'blog/:id', component: BlogComponent, data: {titulo: 'Blog'}},
+        { path: 'productos', component: ProductosComponent, data: {titulo: 'Mantenimiento de productos'}},
         { path: '', redirectTo: '/dashboard', pathMatch: 'full'}
 ];
 
