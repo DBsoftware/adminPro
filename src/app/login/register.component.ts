@@ -32,11 +32,11 @@ export class RegisterComponent implements OnInit {
   );
 
   this.forma.setValue({
-    nombre: 'Fake',
-    email: 'Fake@gmail.com',
-    password: '123456',
-    password2: '123456',
-    condiciones: true
+    nombre: '',
+    email: '',
+    password: '',
+    password2: '',
+    condiciones: false
   });
   }
 

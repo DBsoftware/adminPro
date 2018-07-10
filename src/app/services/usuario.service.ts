@@ -124,7 +124,7 @@ export class UsuarioService {
       return r.usuario;
     }),
     catchError(err => {
-      swal(err.error.msn, err.error.err.message.split(':')[2], 'error');
+      swal(err.error.msn, 'verifica los datos ingresados', 'error');
       return throwError(err);
     })
   );
